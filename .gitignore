@@ -1,0 +1,25 @@
+# Runtime dependencies and build outputs
+node_modules/
+.venv/
+__pycache__/
+*.py[cod]
+bin/
+obj/
+dist/
+.next/
+coverage/
+*.tsbuildinfo
+
+# Local configuration and credentials
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Local tool state
+.sites-runtime/
+.wrangler/
+.vinext/
+*.log
+.DS_Store
+Thumbs.db
