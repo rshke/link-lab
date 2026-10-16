@@ -75,3 +75,7 @@ AI 根据实验反馈持续改进方案的闭环见 [隐藏规律实验环境设
 除另有声明外，本仓库的原创代码、接口定义及文档采用 [Apache License 2.0](LICENSE)，SPDX 标识为 `Apache-2.0`。
 
 第三方依赖及第三方内容保留各自的许可证和版权声明，参见 [第三方许可说明](THIRD_PARTY_NOTICES.md)。
+
+## 既有前端原型
+
+合并远端历史时保留了根目录 `app/`、`components/` 等既有前端及构建文件，运行方式见 [原型运行说明](docs/development/legacy-prototype.md)。这些前端文件尚未接入新的平台服务。`device-twin-demo/` 中本地原型文件保持原位。
