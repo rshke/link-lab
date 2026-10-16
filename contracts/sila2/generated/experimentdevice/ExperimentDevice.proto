@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "SiLAFramework.proto";
+
+package sila2.org.link.simulation.experimentdevice.v1;
+
+/* Minimal device execution and observable status contract. */
+service ExperimentDevice {
+  /* Execute one admitted step. CommandId provides process-lifetime idempotency. */
+  rpc Execute (sila2.org.link.simulation.experimentdevice.v1.Execute_Parameters) returns (sila2.org.silastandard.CommandConfirmation) {}
+  /* Monitor the state of Execute */
+  rpc Execute_Info (sila2.org.silastandard.CommandExecutionUUID) returns (stream sila2.org.silastandard.ExecutionInfo) {}
+  /* Retrieve result of Execute */
+  rpc Execute_Result(sila2.org.silastandard.CommandExecutionUUID) returns (sila2.org.link.simulation.experimentdevice.v1.Execute_Responses) {}
+  /* JSON snapshot with device ID, command ID, state, progress and sequence. */
+  rpc Subscribe_Status (sila2.org.link.simulation.experimentdevice.v1.Subscribe_Status_Parameters) returns (stream sila2.org.link.simulation.experimentdevice.v1.Subscribe_Status_Responses) {}
+}
+
+/* Parameters for Execute */
+message Execute_Parameters {
+  sila2.org.silastandard.String CommandId = 1;  /* Unique step command ID. */
+  sila2.org.silastandard.Integer DurationMs = 2;  /* Simulated duration in milliseconds, 100 to 5000. */
+}
+
+/* Responses of Execute */
+message Execute_Responses {
+  sila2.org.silastandard.String Result = 1;  /* JSON result with command ID and terminal state. */
+}
+
+/* Parameters for Status */
+message Subscribe_Status_Parameters {
+}
+
+/* Responses of Status */
+message Subscribe_Status_Responses {
+  sila2.org.silastandard.String Status = 1;  /* JSON snapshot with device ID, command ID, state, progress and sequence. */
+}

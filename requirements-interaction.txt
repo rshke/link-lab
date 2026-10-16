@@ -1,0 +1,2 @@
+# Runtime and protocol code generation for the local interaction slice.
+sila2[codegen]==0.14.0

@@ -1,6 +1,18 @@
 # 智能实验室平台
 
-本仓库采用 monorepo 管理前端、平台服务、设备适配器和设备模拟器。组件共享版本化接口契约，各自拥有业务实现、配置和数据。当前交付为目录骨架，尚未实现或接通后端服务。
+本仓库采用 monorepo 管理前端、平台服务、设备适配器和设备模拟器。组件共享版本化接口契约，各自拥有业务实现、配置和数据。目前已有一条最小系统通信链路：平台验证准入 → 工作流 → 设备网关 → SiLA 2 检测设备模拟器，支持状态订阅与简单 chaos 注入。其他模块仍为骨架。
+
+## 最小系统交互演示
+
+通过四个独立进程验证 HTTP 与 SiLA 2 通信，启动、接口与限制见 [运行说明](docs/development/interaction-demo.md)。
+
+```powershell
+python -m venv .venv
+.\.venv\Scripts\python -m pip install -r requirements-interaction.txt
+.\.venv\Scripts\python scripts/interaction_demo.py serve
+```
+
+另开终端执行 `.\.venv\Scripts\python scripts/interaction_demo.py normal`，也可将 normal 改为 delay 或 fail，观察状态上报和最终结果。
 
 ## 目录
 
@@ -49,6 +61,8 @@ device-twin-demo/           现有孪生界面原型，保留原有运行方式
 - 各组件独立管理依赖与构建。待语言和运行时确定后添加对应清单与锁文件；当前不添加空壳启动命令或不可运行的部署配置。
 
 服务目录表示职责与演进边界，并不要求首期全部独立部署。参见[monorepo 决策](docs/adr/0001-monorepo.md)。
+
+专门的 Chaos 子系统设计见 [Chaos 设计文档](docs/architecture/chaos-system-design.md)，包含动作故障点、概率判定、多动作关联、管理接口及实施阶段；该子系统尚未实现。
 
 ## 设计依据
 

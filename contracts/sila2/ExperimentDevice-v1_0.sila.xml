@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://www.sila-standard.org" SiLA2Version="1.0" FeatureVersion="1.0" Originator="org.link" Category="simulation">
+  <Identifier>ExperimentDevice</Identifier>
+  <DisplayName>Experiment Device</DisplayName>
+  <Description>Minimal device execution and observable status contract.</Description>
+  <Command>
+    <Identifier>Execute</Identifier><DisplayName>Execute</DisplayName>
+    <Description>Execute one admitted step. CommandId provides process-lifetime idempotency.</Description>
+    <Observable>Yes</Observable>
+    <Parameter><Identifier>CommandId</Identifier><DisplayName>Command ID</DisplayName><Description>Unique step command ID.</Description><DataType><Basic>String</Basic></DataType></Parameter>
+    <Parameter><Identifier>DurationMs</Identifier><DisplayName>Duration</DisplayName><Description>Simulated duration in milliseconds, 100 to 5000.</Description><DataType><Basic>Integer</Basic></DataType></Parameter>
+    <Response><Identifier>Result</Identifier><DisplayName>Result</DisplayName><Description>JSON result with command ID and terminal state.</Description><DataType><Basic>String</Basic></DataType></Response>
+  </Command>
+  <Property>
+    <Identifier>Status</Identifier><DisplayName>Status</DisplayName>
+    <Description>JSON snapshot with device ID, command ID, state, progress and sequence.</Description>
+    <Observable>Yes</Observable><DataType><Basic>String</Basic></DataType>
+  </Property>
+</Feature>

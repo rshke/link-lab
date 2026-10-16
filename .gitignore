@@ -8,6 +8,7 @@ obj/
 dist/
 .next/
 coverage/
+.cache/
 *.tsbuildinfo
 
 # Local configuration and credentials
