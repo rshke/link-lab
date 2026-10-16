@@ -68,6 +68,8 @@ device-twin-demo/           现有孪生界面原型，保留原有运行方式
 
 AI 根据实验反馈持续改进方案的闭环见 [隐藏规律实验环境设计](docs/architecture/experiment-world-design.md)。世界服务拥有私有产物规律，AI 仅通过获准实验和公开测量学习；该系统尚未实现。
 
+设备已通过自定义 SiLA 2 Feature 发布 [内部动作语义声明](docs/architecture/action-semantics.md)，平台可查询参数、前置条件、资源、成功效果和完成判据。通用依赖规划与并行排程尚未实现。
+
 ## 设计依据
 
 架构基线见根目录的《全链路智能实验室系统架构设计.docx》和 `智能实验室模块详细设计/` 中的七份详细设计。原始设计文件、生成脚本与质检产物保持原位。服务划分与原设计的映射见[服务边界](docs/architecture/service-boundaries.md)。

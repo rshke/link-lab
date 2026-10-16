@@ -5,6 +5,7 @@ from application.maintenance import MaintenanceAdmission
 from interaction_http import HtmlResponse, request, serve
 
 WORKFLOW = os.environ.get("WORKFLOW_URL", "http://127.0.0.1:8011")
+GATEWAY = os.environ.get("GATEWAY_URL", "http://127.0.0.1:8012")
 maintenance = MaintenanceAdmission(lambda body: request(WORKFLOW + "/v1/maintenance/actions", body))
 UI = Path(__file__).resolve().parents[4] / "apps/console/maintenance.html"
 
@@ -14,6 +15,8 @@ def dispatch(method, path, body):
         return HtmlResponse(UI.read_text(encoding="utf-8"))
     if method == "GET" and path == "/health":
         return {"service": "platform-api", "status": "ready"}
+    if method == "GET" and path == "/v1/devices/measurement-1/capabilities":
+        return request(GATEWAY + path)
     if method == "POST" and path == "/v1/experiments":
         return admit(body, lambda plan: request(WORKFLOW + "/v1/runs", plan))
     if method == "GET" and path == "/v1/maintenance":

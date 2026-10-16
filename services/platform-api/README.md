@@ -7,3 +7,5 @@
 数据库迁移归本服务 src/infrastructure/persistence/migrations/；组件内部测试归 tests/，跨组件验证归根目录 tests/。
 
 维护模块 `application/maintenance.py` 校验维护请求并记录内存审计，入口同源托管 `apps/console/maintenance.html`。所有设备操作仍交付工作流，接口见 `contracts/api/platform/maintenance-v1.md`。
+
+动作能力查询转发网关已校验快照，见 `contracts/api/platform/capabilities-v1.md`；现有实验准入暂未改成通用动作规划。

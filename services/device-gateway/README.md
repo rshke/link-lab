@@ -7,3 +7,5 @@
 数据库迁移归本服务 src/infrastructure/persistence/migrations/；组件内部测试归 tests/，跨组件验证归根目录 tests/。
 
 维护状态及动作分别映射到 DeviceMaintenance.State 和 Perform，不修改设备故障或工作流预留；接口见 `contracts/api/device-gateway/maintenance-v1.md`。
+
+启动时读取 ActionSemantics.Definitions，用本地 JSON Schema 及真实 Feature 定义校验并缓存动作声明；公开接口见 `contracts/api/device-gateway/capabilities-v1.md`。目前是固定单设备注册，不是通用发现或调度器。

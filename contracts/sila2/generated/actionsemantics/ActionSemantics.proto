@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+import "SiLAFramework.proto";
+
+package sila2.org.link.capabilities.actionsemantics.v1;
+
+/* Versioned internal action declarations. This Feature describes capabilities and does not execute or schedule commands. */
+service ActionSemantics {
+  /* JSON document conforming to the platform action-semantics v1 schema, including parameter bindings, preconditions, resources, success effects and completion evidence. */
+  rpc Get_Definitions (sila2.org.link.capabilities.actionsemantics.v1.Get_Definitions_Parameters) returns (sila2.org.link.capabilities.actionsemantics.v1.Get_Definitions_Responses) {}
+}
+
+/* Parameters for Definitions */
+message Get_Definitions_Parameters {
+}
+
+/* Responses of Definitions */
+message Get_Definitions_Responses {
+  sila2.org.silastandard.String Definitions = 1;  /* JSON document conforming to the platform action-semantics v1 schema, including parameter bindings, preconditions, resources, success effects and completion evidence. */
+}

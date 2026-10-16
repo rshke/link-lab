@@ -1,5 +1,6 @@
 import json
 import os
+from pathlib import Path
 from datetime import timedelta
 
 from sila2.server import SilaServer
@@ -7,6 +8,18 @@ from experimentdevice import ExperimentDeviceBase, ExperimentDeviceFeature, Exec
 from engine import Engine
 from interaction_http import serve
 from devicemaintenance import DeviceMaintenanceBase, DeviceMaintenanceFeature, Perform_Responses
+from actionsemantics import ActionSemanticsBase, ActionSemanticsFeature
+
+
+class ActionDefinitions(ActionSemanticsBase):
+    def __init__(self, server):
+        super().__init__(server)
+        path = Path(__file__).resolve().parents[2] / "config/action-semantics-v1.json"
+        # One immutable declaration per server process; edits require a restart.
+        self.definition = json.dumps(json.loads(path.read_text(encoding="utf-8")))
+
+    def get_Definitions(self, *, metadata):
+        return self.definition
 
 
 class MaintenanceDevice(DeviceMaintenanceBase):
@@ -45,6 +58,7 @@ if __name__ == "__main__":
     server = SilaServer("Measurement Simulator", "Measurement", "Interaction demo", "0.1", "https://example.invalid")
     server.set_feature_implementation(ExperimentDeviceFeature, Device(server, engine))
     server.set_feature_implementation(DeviceMaintenanceFeature, MaintenanceDevice(server, engine))
+    server.set_feature_implementation(ActionSemanticsFeature, ActionDefinitions(server))
     # Local development only. Both protocol and chaos management bind to loopback.
     server.start_insecure("127.0.0.1", int(os.environ.get("SILA_PORT", 50052)), enable_discovery=False)
 

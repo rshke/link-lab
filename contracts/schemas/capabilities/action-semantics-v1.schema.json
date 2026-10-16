@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:link-lab:action-semantics:1.0",
+  "title": "Internal action semantics v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocolVersion", "definitionVersion", "deviceId", "stateBindings", "actions"],
+  "properties": {
+    "protocolVersion": {"const": "1.0"},
+    "definitionVersion": {"type": "integer", "minimum": 1},
+    "deviceId": {"$ref": "#/$defs/identifier"},
+    "stateBindings": {
+      "type": "object", "additionalProperties": false,
+      "required": ["device.maintenance_state"],
+      "properties": {
+        "device.maintenance_state": {
+          "type": "object", "additionalProperties": false,
+          "required": ["feature", "property", "encoding", "field"],
+          "properties": {
+            "feature": {"$ref": "#/$defs/feature"},
+            "property": {"$ref": "#/$defs/identifier"},
+            "encoding": {"const": "json"}, "field": {"const": "state"}
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "array", "minItems": 1, "maxItems": 64,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["id", "description", "binding", "parameters", "preconditions", "resources", "effects", "completion"],
+        "properties": {
+          "id": {"$ref": "#/$defs/identifier"},
+          "description": {"type": "string", "minLength": 1, "maxLength": 500},
+          "binding": {
+            "type": "object", "additionalProperties": false,
+            "required": ["feature", "command", "commandIdParameter"],
+            "properties": {
+              "feature": {"$ref": "#/$defs/feature"},
+              "command": {"$ref": "#/$defs/identifier"},
+              "commandIdParameter": {"$ref": "#/$defs/identifier"}
+            }
+          },
+          "parameters": {
+            "type": "object", "minProperties": 1, "maxProperties": 32,
+            "propertyNames": {"$ref": "#/$defs/identifier"},
+            "additionalProperties": {
+              "type": "object", "additionalProperties": false,
+              "required": ["type", "unit", "minimum", "maximum", "required", "silaParameter"],
+              "properties": {
+                "type": {"const": "integer"}, "unit": {"const": "ms"},
+                "minimum": {"type": "integer"}, "maximum": {"type": "integer"},
+                "required": {"const": true}, "silaParameter": {"$ref": "#/$defs/identifier"}
+              }
+            }
+          },
+          "preconditions": {
+            "type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true,
+            "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["scope", "fact", "operator", "value"],
+              "properties": {
+                "scope": {"const": "device"}, "fact": {"const": "device.maintenance_state"},
+                "operator": {"const": "equals"}, "value": {"const": "ready"}
+              }
+            }
+          },
+          "resources": {
+            "type": "array", "minItems": 1, "maxItems": 32,
+            "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["id", "mode"],
+              "properties": {"id": {"$ref": "#/$defs/identifier"}, "mode": {"const": "exclusive"}}
+            }
+          },
+          "effects": {
+            "type": "array", "minItems": 1, "maxItems": 16, "uniqueItems": true,
+            "items": {
+              "type": "object", "additionalProperties": false,
+              "required": ["when", "scope", "fact", "value"],
+              "properties": {
+                "when": {"const": "succeeded"}, "scope": {"const": "command"},
+                "fact": {"const": "command.succeeded"}, "value": {"const": true}
+              }
+            }
+          },
+          "completion": {
+            "type": "object", "additionalProperties": false,
+            "required": ["type", "response", "encoding", "successField", "successValue"],
+            "properties": {
+              "type": {"const": "observable_command_result"},
+              "response": {"$ref": "#/$defs/identifier"}, "encoding": {"const": "json"},
+              "successField": {"const": "state"}, "successValue": {"const": "succeeded"}
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {"type": "string", "pattern": "^[A-Za-z][A-Za-z0-9_.:-]{0,99}$"},
+    "feature": {"type": "string", "pattern": "^[a-z0-9.]+/[A-Za-z0-9]+/[A-Za-z0-9]+/v[0-9]+$", "maxLength": 200}
+  }
+}

@@ -1,0 +1,14 @@
+<Feature xmlns="http://www.sila-standard.org" Category="capabilities" FeatureVersion="1.0" Originator="org.link" SiLA2Version="1.0">
+  <Identifier>ActionSemantics</Identifier>
+  <DisplayName>Action Semantics</DisplayName>
+  <Description>Versioned internal action declarations. This Feature describes capabilities and does not execute or schedule commands.</Description>
+  <Property>
+    <Identifier>Definitions</Identifier>
+    <DisplayName>Action Definitions</DisplayName>
+    <Description>JSON document conforming to the platform action-semantics v1 schema, including parameter bindings, preconditions, resources, success effects and completion evidence.</Description>
+    <Observable>No</Observable>
+    <DataType>
+      <Basic>String</Basic>
+    </DataType>
+  </Property>
+</Feature>

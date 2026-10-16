@@ -4,11 +4,17 @@ import time
 from collections import deque
 
 from sila2.client import SilaClient
+from infrastructure.capability_reader import read_snapshot
 
 
 class SilaDevice:
     def __init__(self, port):
         self.client = SilaClient("127.0.0.1", port, insecure=True)
+        try:
+            self._capabilities = read_snapshot(self.client, "measurement-1")
+        except Exception:
+            self.client.close()
+            raise
         self.lock = threading.Lock()
         self.events = deque(maxlen=1000)
         self.subscription = self.client.ExperimentDevice.Status.subscribe()
@@ -26,6 +32,9 @@ class SilaDevice:
 
     def maintenance_state(self):
         return json.loads(self.client.DeviceMaintenance.State.get())
+
+    def capabilities(self):
+        return json.loads(json.dumps(self._capabilities))
 
     def maintain(self, request):
         return json.loads(self.client.DeviceMaintenance.Perform(

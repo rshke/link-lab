@@ -4,6 +4,8 @@
 
 measurement 现支持三种持续故障及各自维修流程，规则位于 `runtime/maintenance.py`；通过 DeviceMaintenance SiLA 2 Feature 检查、操作和自检，独立管理接口只用于开发注入。详见 `docs/development/device-maintenance.md`。
 
+measurement 的 `config/action-semantics-v1.json` 定义已实现动作的内部语义，通过 ActionSemantics.Definitions 只读属性发布，供网关以协议读取。声明不包含未实现设备的能力，见 `docs/architecture/action-semantics.md`。
+
 | 目录 | 职责 |
 | --- | --- |
 | robot | 位姿、路径、搬运、载荷与工位交互 |

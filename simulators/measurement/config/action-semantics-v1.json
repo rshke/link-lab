@@ -1,0 +1,38 @@
+{
+  "protocolVersion": "1.0",
+  "definitionVersion": 1,
+  "deviceId": "measurement-1",
+  "stateBindings": {
+    "device.maintenance_state": {
+      "feature": "org.link/maintenance/DeviceMaintenance/v1",
+      "property": "State", "encoding": "json", "field": "state"
+    }
+  },
+  "actions": [
+    {
+      "id": "simulation.execute",
+      "description": "Simulate a timed action with progress and a terminal result; no chemical assay or sample transformation is implemented.",
+      "binding": {
+        "feature": "org.link/simulation/ExperimentDevice/v1",
+        "command": "Execute", "commandIdParameter": "CommandId"
+      },
+      "parameters": {
+        "durationMs": {
+          "type": "integer", "unit": "ms", "minimum": 100, "maximum": 5000,
+          "required": true, "silaParameter": "DurationMs"
+        }
+      },
+      "preconditions": [
+        {"scope": "device", "fact": "device.maintenance_state", "operator": "equals", "value": "ready"}
+      ],
+      "resources": [{"id": "measurement-1.device", "mode": "exclusive"}],
+      "effects": [
+        {"when": "succeeded", "scope": "command", "fact": "command.succeeded", "value": true}
+      ],
+      "completion": {
+        "type": "observable_command_result", "response": "Result", "encoding": "json",
+        "successField": "state", "successValue": "succeeded"
+      }
+    }
+  ]
+}

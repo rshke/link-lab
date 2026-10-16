@@ -11,6 +11,8 @@ if __name__ == "__main__":
             return {"service": "device-gateway", "status": "ready"}
         if method == "GET" and path == "/v1/observations":
             return device.observations()
+        if method == "GET" and path == "/v1/devices/measurement-1/capabilities":
+            return device.capabilities()
         if method == "POST" and path == "/v1/commands":
             return device.execute(body)
         if method == "GET" and path == "/v1/maintenance":

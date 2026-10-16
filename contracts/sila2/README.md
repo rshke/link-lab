@@ -15,6 +15,16 @@ JSON 内容是本演示 Feature 的版本化负载约定，不是其他 SiLA 设
 
 本地演示关闭 TLS 和服务发现，监听 `127.0.0.1:50052`。订阅不提供持久化游标、断线补发或自动重连保证。
 
+## ActionSemantics Feature v1.0
+
+源契约为 `ActionSemantics-v1_0.sila.xml`。只读属性 Definitions 返回符合 `contracts/schemas/capabilities/action-semantics-v1.schema.json` 的 JSON 声明，包含动作参数、SiLA 执行绑定、前置条件、资源、成功效果和完成判据。此 Feature 是本项目扩展，非 SiLA 2 标准化调度协议。
+
+当前只声明已实现的 simulation.execute。属性不执行命令，不改变设备状态，也不代表当前能立即执行。声明变更需更新 definitionVersion 并重新注册；详细语义见 `contracts/schemas/capabilities/README.md`。
+
+```powershell
+.\.venv\Scripts\sila2-codegen.exe generate-feature-files --overwrite --output-directory contracts/sila2/generated contracts/sila2/ActionSemantics-v1_0.sila.xml
+```
+
 ## DeviceMaintenance Feature v1.0
 
 新增源契约 `DeviceMaintenance-v1_0.sila.xml`，不改变现有 ExperimentDevice Feature。
