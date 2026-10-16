@@ -64,6 +64,8 @@ device-twin-demo/           现有孪生界面原型，保留原有运行方式
 
 专门的 Chaos 子系统设计见 [Chaos 设计文档](docs/architecture/chaos-system-design.md)，包含动作故障点、概率判定、多动作关联、管理接口及实施阶段；该子系统尚未实现。
 
+AI 根据实验反馈持续改进方案的闭环见 [隐藏规律实验环境设计](docs/architecture/experiment-world-design.md)。世界服务拥有私有产物规律，AI 仅通过获准实验和公开测量学习；该系统尚未实现。
+
 ## 设计依据
 
 架构基线见根目录的《全链路智能实验室系统架构设计.docx》和 `智能实验室模块详细设计/` 中的七份详细设计。原始设计文件、生成脚本与质检产物保持原位。服务划分与原设计的映射见[服务边界](docs/architecture/service-boundaries.md)。
