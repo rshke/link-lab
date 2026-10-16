@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+import "SiLAFramework.proto";
+
+package sila2.org.link.maintenance.devicemaintenance.v1;
+
+/* Inspect, simulate physical repair and verify the demo device. Independent of experiment execution. */
+service DeviceMaintenance {
+  /* Apply an idempotent repair action to an incident at the expected revision. */
+  rpc Perform (sila2.org.link.maintenance.devicemaintenance.v1.Perform_Parameters) returns (sila2.org.link.maintenance.devicemaintenance.v1.Perform_Responses) {}
+  /* JSON fault, repair progress and history snapshot. */
+  rpc Get_State (sila2.org.link.maintenance.devicemaintenance.v1.Get_State_Parameters) returns (sila2.org.link.maintenance.devicemaintenance.v1.Get_State_Responses) {}
+}
+
+/* Parameters for Perform */
+message Perform_Parameters {
+  sila2.org.silastandard.String RequestId = 1;  /* Unique maintenance request ID. */
+  sila2.org.silastandard.String IncidentId = 2;  /* Fault incident ID. */
+  sila2.org.silastandard.String Action = 3;  /* Registered maintenance action. */
+  sila2.org.silastandard.Integer ExpectedRevision = 4;  /* Observed maintenance state revision. */
+}
+
+/* Responses of Perform */
+message Perform_Responses {
+  sila2.org.silastandard.String Result = 1;  /* JSON accepted flag, message and device snapshot. */
+}
+
+/* Parameters for State */
+message Get_State_Parameters {
+}
+
+/* Responses of State */
+message Get_State_Responses {
+  sila2.org.silastandard.String State = 1;  /* JSON fault, repair progress and history snapshot. */
+}

@@ -14,6 +14,8 @@ python -m venv .venv
 
 另开终端执行 `.\.venv\Scripts\python scripts/interaction_demo.py normal`，也可将 normal 改为 delay 或 fail，观察状态上报和最终结果。
 
+设备维修模拟页面为 `http://127.0.0.1:8010/maintenance`，支持通道堵塞、传感器漂移和内部线缆松动各自的检查、维修与自检流程，操作方式见 [设备维护说明](docs/development/device-maintenance.md)。
+
 ## 目录
 
 ```text

@@ -87,7 +87,8 @@ def scenario(mode):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("action", choices=("serve", "normal", "delay", "fail"))
+    parser.add_argument("action", choices=("serve", "normal", "delay", "fail",
+                                          "channel_blockage", "sensor_drift", "loose_cable"))
     args = parser.parse_args()
     if args.action == "serve":
         with Stack():
@@ -97,5 +98,8 @@ if __name__ == "__main__":
                     time.sleep(1)
             except KeyboardInterrupt:
                 pass
+    elif args.action in ("channel_blockage", "sensor_drift", "loose_cable"):
+        print(json.dumps(call(8013, "/v2/faults", {"code": args.action}), indent=2, ensure_ascii=True))
+        print("Open http://127.0.0.1:8010/maintenance to inspect, repair and self-test.")
     else:
         scenario(args.action)

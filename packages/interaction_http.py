@@ -3,6 +3,12 @@ import json
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from urllib.request import Request, urlopen
 from urllib.error import HTTPError
+from dataclasses import dataclass
+
+
+@dataclass(frozen=True)
+class HtmlResponse:
+    content: str
 
 
 def request(url, payload=None):
@@ -29,9 +35,11 @@ def serve(port, dispatch):
                 status, result = 400, {"error": str(error)}
             except Exception as error:
                 status, result = 502, {"error": str(error)}
-            raw = json.dumps(result).encode()
+            html = isinstance(result, HtmlResponse)
+            raw = result.content.encode("utf-8") if html else json.dumps(result).encode()
             self.send_response(status)
-            self.send_header("Content-Type", "application/json; charset=utf-8")
+            self.send_header("Content-Type", "text/html; charset=utf-8" if html else "application/json; charset=utf-8")
+            self.send_header("Cache-Control", "no-store")
             self.send_header("Content-Length", str(len(raw)))
             self.end_headers()
             self.wfile.write(raw)

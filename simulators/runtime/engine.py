@@ -1,6 +1,7 @@
 """Small simulated action engine; no dependency on the SiLA SDK."""
 import threading
 import time
+from maintenance import Maintenance
 
 
 class Engine:
@@ -10,6 +11,25 @@ class Engine:
         self.busy = False
         self.completed = {}
         self.sequence = 0
+        self.maintenance = Maintenance()
+
+    def maintenance_state(self):
+        with self.lock:
+            return self.maintenance.snapshot()
+
+    def inject_fault(self, body):
+        if not isinstance(body, dict) or set(body) != {"code"}:
+            raise ValueError("Expected fault code only")
+        with self.lock:
+            if self.busy:
+                raise ValueError("Cannot inject a persistent fault during execution")
+            return self.maintenance.inject(body["code"])
+
+    def maintain(self, request_id, incident_id, action, revision):
+        with self.lock:
+            if self.busy:
+                return {"accepted": False, "message": "设备仍在执行动作", "device": self.maintenance.snapshot()}
+            return self.maintenance.apply(request_id, incident_id, action, revision)
 
     def configure(self, body):
         if not isinstance(body, dict) or set(body) != {"mode"}:
@@ -31,6 +51,11 @@ class Engine:
                 return dict(result)
             if self.busy:
                 raise ValueError("Device is busy")
+            if self.maintenance.state != "ready":
+                result = {"commandId": command_id, "state": "failed",
+                          "error": "Device requires maintenance", "faultCode": self.maintenance.code}
+                self.completed[command_id] = (duration_ms, result)
+                return dict(result)
             self.busy = True
             mode, self.mode = self.mode, "normal"
         try:

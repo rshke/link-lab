@@ -2,6 +2,8 @@
 
 模拟器是独立设备进程，通过共享的 SiLA 2 Feature 接入设备网关。目前 measurement 已有最小执行、进度和故障注入实现，robot 与 liquid-handler 仍为占位目录。
 
+measurement 现支持三种持续故障及各自维修流程，规则位于 `runtime/maintenance.py`；通过 DeviceMaintenance SiLA 2 Feature 检查、操作和自检，独立管理接口只用于开发注入。详见 `docs/development/device-maintenance.md`。
+
 | 目录 | 职责 |
 | --- | --- |
 | robot | 位姿、路径、搬运、载荷与工位交互 |

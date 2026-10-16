@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>设备维护 · 智能实验室</title>
+  <style>
+    :root{font-family:Inter,"Segoe UI","Microsoft YaHei",sans-serif;color:#233244;background:#f3f5f8;font-synthesis:none}
+    *{box-sizing:border-box}body{margin:0}button,select{font:inherit}button{cursor:pointer;border:0;border-radius:8px;padding:11px 18px;font-weight:600;background:#1d5eeb;color:white}button:disabled{opacity:.4;cursor:not-allowed}button.secondary{background:#edf2fa;color:#324d75;border:1px solid #dbe3ee}button:hover:not(:disabled){filter:brightness(.96)}
+    header{height:70px;display:flex;align-items:center;justify-content:space-between;padding:0 36px;background:white;border-bottom:1px solid #e2e7ee}.brand{font-weight:700;font-size:17px;display:flex;gap:12px;align-items:center}.mark{background:#1d5eeb;color:white;padding:6px 9px;border-radius:8px}.tag{background:#eff4ff;color:#4268a4;font-size:12px;padding:6px 10px;border-radius:20px}.layout{display:grid;grid-template-columns:205px 1fr;min-height:calc(100vh - 70px)}aside{padding:30px 18px;background:#fbfcfe;border-right:1px solid #e2e7ee}.nav-title{font-size:11px;letter-spacing:2px;color:#8b97a8;margin:0 14px 18px}.nav-item{font-size:14px;padding:13px 14px;color:#1d5eeb;background:#e9effe;border-radius:8px;font-weight:600}.aside-note{margin:24px 14px;font-size:12px;color:#7d899a;line-height:1.9}main{padding:36px 40px;max-width:1450px;width:100%;margin:auto}.eyebrow{color:#7a889b;font-size:12px;letter-spacing:2px}h1{font-size:28px;letter-spacing:-.6px;margin:9px 0 10px}p{line-height:1.7}.subtitle{color:#748195;font-size:14px;margin:0}.top{display:flex;justify-content:space-between;align-items:center;gap:18px;margin-bottom:25px}.grid{display:grid;grid-template-columns:1.3fr 1fr;gap:22px}.card{border:1px solid #e0e6ee;background:white;border-radius:12px;padding:25px;box-shadow:0 3px 8px #182e4903}.card h2{font-size:16px;margin:0 0 20px}.device-head{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.device-title{font-weight:650;font-size:19px}.meta{font-family:Consolas,monospace;color:#8190a2;font-size:12px;margin-top:7px}.status{font-size:12px;padding:6px 10px;border-radius:20px;white-space:nowrap;background:#edf1f6;color:#536276}.status.warn{color:#a6630d;background:#fff3dc}.status.good{color:#147859;background:#e9f8f0}.fault{background:#fff9ed;border:1px solid #f5dfb5;border-radius:8px;padding:17px;margin:23px 0;font-size:14px}.fault strong{display:block;color:#8a5718;margin-bottom:8px}.fault p{margin:0;color:#8a7659;font-size:13px}.empty{padding:26px 18px;background:#f4f9f7;border-radius:8px;margin:24px 0;color:#396653;font-size:14px}.steps{list-style:none;padding:0;margin:8px 0 24px}.steps li{display:flex;gap:12px;padding:12px 0;align-items:center;font-size:14px}.number{height:25px;width:25px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#edf1f7;color:#8592a3;font-size:12px;flex-shrink:0}.done .number{background:#e6f5ed;color:#19845c}.steps small{display:block;font-size:12px;color:#8b96a5;margin-top:3px}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}label{font-size:12px;color:#77869b;display:block;margin-bottom:8px}select{width:100%;padding:11px 12px;border:1px solid #d9e1ed;background:white;border-radius:7px;color:#34465f}select:focus,button:focus-visible{outline:3px solid #b5ceff;outline-offset:3px}.notice{font-size:12px;color:#7a8799;line-height:1.8;margin:20px 0 0;border-top:1px solid #edf0f5;padding-top:16px}.history-card{margin-top:22px}.history{max-height:310px;overflow:auto}.entry{display:grid;grid-template-columns:90px 1fr;gap:15px;border-top:1px solid #edf0f5;padding:13px 0;font-size:13px}.entry time{color:#8a98a9;font-family:Consolas,monospace}.entry p{margin:0;color:#52637a}.muted{color:#8b96a5;font-size:13px}.banner{padding:13px 16px;border-radius:8px;font-size:13px;margin:0 0 22px;background:#eaf1ff;color:#375d97;line-height:1.7}.banner.error{background:#fff0ee;color:#a2443b}.info-row{display:flex;justify-content:space-between;padding:13px 0;border-bottom:1px solid #edf0f5;font-size:13px;color:#738197}.info-row span:last-child{color:#324760}.section-gap{margin-top:26px}.code{font-family:Consolas,monospace;background:#f4f6fa;padding:12px;border-radius:6px;font-size:12px;overflow-wrap:anywhere;line-height:1.8}.footer{font-size:11px;color:#94a0af;text-align:right;padding-top:18px}
+    @media(max-width:1000px){.layout{grid-template-columns:1fr}aside{display:none}main{padding:25px}.grid{grid-template-columns:1fr}}@media(max-width:550px){header{padding:0 20px}.brand{font-size:14px}main{padding:20px 14px}.card{padding:20px}.top{align-items:flex-start}h1{font-size:24px}.entry{grid-template-columns:75px 1fr}}
+  </style>
+</head>
+<body>
+  <header><div class="brand"><span class="mark">L</span>智能实验室<span style="font-weight:400;color:#a2acba">/</span>运行保障</div><span class="tag">本地模拟环境</span></header>
+  <div class="layout"><aside><div class="nav-title">OPERATIONS</div><div class="nav-item">◇　设备维护</div><p class="aside-note">模拟线下操作<br>匹配故障类型<br>复检后恢复可用</p></aside>
+  <main>
+    <div class="top"><div><div class="eyebrow">DEVICE MAINTENANCE</div><h1>设备维护工作台</h1><p class="subtitle">定位异常，模拟维修，通过自检后重新投入使用。</p></div><button class="secondary" id="refresh">刷新状态</button></div>
+    <div id="banner" class="banner" role="status" aria-live="polite">正在连接平台…</div>
+    <div class="grid">
+      <section class="card"><h2>当前设备</h2><div class="device-head"><div><div class="device-title">检测设备 01</div><div class="meta">measurement-1 · SiLA 2</div></div><span class="status" id="state">连接中</span></div>
+        <div id="fault"></div><ol class="steps" id="steps"></ol>
+        <div class="actions"><button id="inspect">开始故障检查</button><button class="secondary" id="self-test">运行设备自检</button></div>
+        <p class="notice">维修恢复的是设备可用性。已失败的实验和受影响的样品不会自动恢复，也不会自动重新执行。</p>
+      </section>
+      <section class="card"><h2>模拟线下维修</h2><p class="subtitle" id="instruction">故障出现后，先完成检查，再按顺序执行对应维修操作。</p>
+        <div class="section-gap"><label for="operation">选择维修操作</label><select id="operation"><option value="flush_channel">冲洗检测通道</option><option value="replace_filter">更换过滤器</option><option value="clean_sensor">清洁传感器</option><option value="calibrate_sensor">使用标准样校准</option><option value="reseat_cable">重新插接线缆</option><option value="secure_connector">锁紧接插件</option></select></div>
+        <div class="actions"><button id="perform">模拟执行所选操作</button></div><p class="notice">不同异常需要不同操作。无关操作或顺序错误会被拒绝，设备保持不可用；完成全部步骤后仍需自检。</p>
+        <div class="section-gap"><div class="info-row"><span>维护记录版本</span><span id="revision">—</span></div><div class="info-row"><span>工作流设备预留</span><span id="reservation">—</span></div><div class="info-row"><span>最后同步</span><span id="synced">—</span></div></div>
+      </section>
+    </div>
+    <section class="card history-card"><h2>检查与维修记录</h2><div class="history" id="history"><p class="muted">等待维护记录。</p></div></section>
+    <details class="card history-card"><summary>如何载入演示故障</summary><p class="subtitle">在仓库根目录的另一个终端执行以下任一命令。故障注入是开发测试入口；本页面仅通过平台提交维修请求。</p><p class="code">.\.venv\Scripts\python scripts/interaction_demo.py channel_blockage<br>.\.venv\Scripts\python scripts/interaction_demo.py sensor_drift<br>.\.venv\Scripts\python scripts/interaction_demo.py loose_cable</p><p class="muted">此处“线缆松动”模拟设备内部连接，不代表 SiLA 网络连接中断。</p></details>
+    <div class="footer">单设备维护演示 · 记录保存在当前进程内存</div>
+  </main></div>
+  <script>
+    const $ = id => document.getElementById(id);
+    const names = {ready:'设备可用',faulted:'故障待检查',diagnosed:'已定位故障',repairing:'维修中',awaiting_self_test:'待自检'};
+    let snapshot = null, busy = false, pending = null, selectionKey = '';
+    function message(text, error=false){ $('banner').textContent=text; $('banner').className='banner'+(error?' error':''); }
+    async function api(path,body){const res=await fetch(path,{method:body?'POST':'GET',headers:body?{'Content-Type':'application/json'}:{},body:body?JSON.stringify(body):undefined});const data=await res.json();if(!res.ok){const error=new Error(data.error||'平台请求失败');error.status=res.status;throw error;}return data;}
+    function buttons(){const blocked=busy||pending!==null||!snapshot||snapshot.workflowReserved||snapshot.state==='ready';$('inspect').disabled=blocked||snapshot?.state!=='faulted';$('perform').disabled=blocked||!['diagnosed','repairing'].includes(snapshot?.state);$('self-test').disabled=blocked;$('operation').disabled=blocked;$('refresh').disabled=busy;}
+    function render(data){
+      snapshot=data;$('state').textContent=names[data.state]||data.state;$('state').className='status '+(data.state==='ready'?'good':'warn');$('revision').textContent=data.revision;$('reservation').textContent=data.workflowReserved?'已预留，禁止维修':'空闲';$('synced').textContent=new Date().toLocaleTimeString('zh-CN');
+      $('fault').replaceChildren();$('steps').replaceChildren();$('history').replaceChildren();
+      if(data.state==='ready'){const node=document.createElement('div');node.className='empty';node.textContent='设备已就绪。发生持续故障后，将在此显示对应的检查与维修流程。';$('fault').append(node);$('instruction').textContent='当前无需维修。可从下方说明载入一种演示故障。';}
+      else if(data.recipe){const box=document.createElement('div');box.className='fault';const title=document.createElement('strong');title.textContent=data.recipe.title;const text=document.createElement('p');text.textContent=data.state==='faulted'?'先检查现场现象，确认维修方案。':data.recipe.finding;box.append(title,text);$('fault').append(box);
+        const flow=[{label:data.recipe.inspection,done:data.state!=='faulted'},...data.recipe.steps.map(s=>({...s,done:data.completed.includes(s.action)})),{label:'运行自检并确认设备可用',done:false}];flow.forEach((s,i)=>{const li=document.createElement('li');li.className=s.done?'done':'';const n=document.createElement('span');n.className='number';n.textContent=s.done?'✓':i+1;const label=document.createElement('span');label.textContent=s.label;li.append(n,label);$('steps').append(li);});
+        const next=data.recipe.steps.find(s=>!data.completed.includes(s.action));const key=data.incidentId+':'+data.completed.length;if(selectionKey!==key&&next){$('operation').value=next.action;selectionKey=key;}$('instruction').textContent=next?'下一步：'+next.label+'。请模拟完成对应线下操作。':'维修步骤已完成，请运行设备自检。';}
+      if(!data.history.length){const p=document.createElement('p');p.className='muted';p.textContent='暂无维护记录。';$('history').append(p);}
+      [...data.history].reverse().forEach(item=>{const row=document.createElement('div');row.className='entry';const at=document.createElement('time');at.dateTime=item.at;at.textContent=new Date(item.at).toLocaleTimeString('zh-CN');const text=document.createElement('p');text.textContent=item.message;row.append(at,text);$('history').append(row);});buttons();
+    }
+    async function refresh(manual=false){if(busy)return;try{const data=await api('/v1/maintenance');render(data);if(pending){message('上次操作结果未确认。点击“重试确认”，使用相同请求 ID 查询执行结果。',true);}else if(manual)message('已同步设备维护状态。');else if($('banner').textContent==='正在连接平台…')message('平台已连接。检查和维修操作均通过工作流与设备协议执行。');}catch(error){snapshot=null;buttons();message('无法读取设备状态：'+error.message,true);}}
+    async function perform(action){
+      if(busy||!snapshot)return;
+      const body=pending||{requestId:crypto.randomUUID(),incidentId:snapshot.incidentId,action,expectedRevision:snapshot.revision};busy=true;buttons();message('正在执行模拟维护操作…');
+      try{const result=await api('/v1/maintenance/actions',body);pending=null;render(await api('/v1/maintenance'));message(result.message,!result.accepted);}
+      catch(error){pending=error.status>=400&&error.status<500?null:body;message((pending?'操作结果未确认：':'操作未被准入：')+error.message+(pending?'。请重试确认，勿重复执行其他操作。':''),true);}
+      finally{busy=false;buttons();$('retry').hidden=!pending;}
+    }
+    const retry=document.createElement('button');retry.id='retry';retry.className='secondary';retry.textContent='重试确认';retry.hidden=true;$('banner').after(retry);retry.style.marginBottom='18px';retry.onclick=()=>perform(pending?.action);
+    $('inspect').onclick=()=>perform('inspect');$('perform').onclick=()=>perform($('operation').value);$('self-test').onclick=()=>perform('self_test');$('refresh').onclick=()=>refresh(true);buttons();refresh();setInterval(()=>refresh(),2000);
+  </script>
+</body>
+</html>

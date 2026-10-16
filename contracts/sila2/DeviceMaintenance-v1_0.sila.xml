@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Feature xmlns="http://www.sila-standard.org" SiLA2Version="1.0" FeatureVersion="1.0" Originator="org.link" Category="maintenance">
+  <Identifier>DeviceMaintenance</Identifier><DisplayName>Device Maintenance</DisplayName>
+  <Description>Inspect, simulate physical repair and verify the demo device. Independent of experiment execution.</Description>
+  <Command>
+    <Identifier>Perform</Identifier><DisplayName>Perform Maintenance</DisplayName>
+    <Description>Apply an idempotent repair action to an incident at the expected revision.</Description><Observable>No</Observable>
+    <Parameter><Identifier>RequestId</Identifier><DisplayName>Request ID</DisplayName><Description>Unique maintenance request ID.</Description><DataType><Basic>String</Basic></DataType></Parameter>
+    <Parameter><Identifier>IncidentId</Identifier><DisplayName>Incident ID</DisplayName><Description>Fault incident ID.</Description><DataType><Basic>String</Basic></DataType></Parameter>
+    <Parameter><Identifier>Action</Identifier><DisplayName>Action</DisplayName><Description>Registered maintenance action.</Description><DataType><Basic>String</Basic></DataType></Parameter>
+    <Parameter><Identifier>ExpectedRevision</Identifier><DisplayName>Expected Revision</DisplayName><Description>Observed maintenance state revision.</Description><DataType><Basic>Integer</Basic></DataType></Parameter>
+    <Response><Identifier>Result</Identifier><DisplayName>Result</DisplayName><Description>JSON accepted flag, message and device snapshot.</Description><DataType><Basic>String</Basic></DataType></Response>
+  </Command>
+  <Property><Identifier>State</Identifier><DisplayName>Maintenance State</DisplayName><Description>JSON fault, repair progress and history snapshot.</Description><Observable>No</Observable><DataType><Basic>String</Basic></DataType></Property>
+</Feature>

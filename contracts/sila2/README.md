@@ -14,3 +14,18 @@ JSON 内容是本演示 Feature 的版本化负载约定，不是其他 SiLA 设
 ```
 
 本地演示关闭 TLS 和服务发现，监听 `127.0.0.1:50052`。订阅不提供持久化游标、断线补发或自动重连保证。
+
+## DeviceMaintenance Feature v1.0
+
+新增源契约 `DeviceMaintenance-v1_0.sila.xml`，不改变现有 ExperimentDevice Feature。
+
+- `State`：不可观察属性，JSON 快照包含 deviceId、incidentId、faultCode、state、revision、recipe、completed 和 history。state 为 ready、faulted、diagnosed、repairing 或 awaiting_self_test。recipe 为适用的检查说明和有序维修步骤；ready 时可保留上一故障及历史以供追溯。
+- `Perform(RequestId, IncidentId, Action, ExpectedRevision)`：不可观察命令，执行快速的模拟操作并返回 JSON Result，含 accepted、message、device。Action 包含 inspect、self_test 及当前 recipe 定义的操作。先检查，再按序完成所有专属维修步骤，最后自检；错误操作、自检过早、版本过期不会清除故障。此处自检验证模拟状态机，不代表真实设备物理检测。
+
+不同故障的维修步骤为：channel_blockage 先 flush_channel 再 replace_filter；sensor_drift 先 clean_sensor 再 calibrate_sensor；loose_cable 先 reseat_cable 再 secure_connector。相同 RequestId 和原始字段返回同一缓存结果；ID 重用但字段不同会拒绝。设备端保存故障及维修进度，工作流保存独占预留，平台保存演示审计记录；均不持久化。
+
+重新生成新 Feature：
+
+```powershell
+.\.venv\Scripts\sila2-codegen.exe generate-feature-files --overwrite --output-directory contracts/sila2/generated contracts/sila2/DeviceMaintenance-v1_0.sila.xml
+```

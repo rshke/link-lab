@@ -13,6 +13,10 @@ if __name__ == "__main__":
             return device.observations()
         if method == "POST" and path == "/v1/commands":
             return device.execute(body)
+        if method == "GET" and path == "/v1/maintenance":
+            return device.maintenance_state()
+        if method == "POST" and path == "/v1/maintenance/actions":
+            return device.maintain(body)
         raise ValueError("Unknown gateway route")
 
     try:

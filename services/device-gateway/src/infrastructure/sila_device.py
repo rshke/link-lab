@@ -24,6 +24,14 @@ class SilaDevice:
         with self.lock:
             return {"observations": list(self.events)}
 
+    def maintenance_state(self):
+        return json.loads(self.client.DeviceMaintenance.State.get())
+
+    def maintain(self, request):
+        return json.loads(self.client.DeviceMaintenance.Perform(
+            request["requestId"], request["incidentId"], request["action"],
+            request["expectedRevision"]).Result)
+
     def execute(self, command):
         if not isinstance(command, dict) or set(command) != {"commandId", "deviceId", "durationMs"}:
             raise ValueError("Expected commandId, deviceId and durationMs")
